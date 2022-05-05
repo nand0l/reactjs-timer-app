@@ -1,12 +1,46 @@
-import React, { useCallback, useEffect, useState, memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 
-function Actions({ toggleForm, setToggleForm,
-    inputMin, setInputMin,
-    startCountDown, setStartCountDown,
-    timerMin, setTimerMin,
+function Actions({ toggleForm, inputMin,
+    startCountDown,
     onToggle, handleChange,
     startTimer,
-    stopTimer }) {
+    stopTimer, usedTimes, setUsedTimes }) {
+
+    const [mostUsedObj, setMostUsedObj] = useState([]);
+
+    function onReset() {
+        setMostUsedObj([]);
+        setUsedTimes([]);
+    }
+
+    useEffect(() => {
+
+        let numMap = {};
+
+        usedTimes.forEach(function (num) {
+            if (numMap[num]) {
+                numMap[num]++;
+            } else {
+                numMap[num] = 1;
+            }
+        });
+
+
+        //sort function
+        let sortable = [];
+        for (var num in numMap) {
+            sortable.push([num, numMap[num]]);
+        }
+
+        sortable.sort(function (a, b) {
+            return a[1] - b[1];
+        });
+
+
+
+        setMostUsedObj(sortable.reverse())
+
+    }, [usedTimes])
 
     return (
         <div className="ac-container">
@@ -27,17 +61,20 @@ function Actions({ toggleForm, setToggleForm,
                 <div className="used-timers">
                     <h2>Most used timers</h2>
                     <ul>
-                        <li><button>5 mins</button> </li>
+                        {mostUsedObj.map((time) => (<li key={time}>
+                            <button> {time[0]} mins</button> </li>))}
+
+                        {/* <li><button>5 mins</button> </li>
                         <li><button>10 mins</button></li>
                         <li><button>2 mins</button></li>
                         <li><button>2 mins</button></li>
                         <li><button>2 mins</button></li>
-                        <li><button>2 mins</button></li>
+                        <li><button>2 mins</button></li> */}
                     </ul>
                 </div>
 
                 <div className="reset">
-                    <button>Clear</button>
+                    <button onClick={onReset}>Clear</button>
                 </div>
             </div>
         </div>

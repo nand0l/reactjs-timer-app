@@ -12,10 +12,8 @@ function Progress({ timerMin, dateWithMins, animationDuration, stopTimer }) {
   // Clear Intervals and rest time
   useEffect(() => {
     if ((days + hours + minutes + seconds) <= 0) {
-      var interval_id = window.setInterval(() => { }, 99999);
-      for (var i = 0; i < interval_id; i++)
-        window.clearInterval(i);
       stopTimer();
+      return;
     }
   }, [minutes, seconds])
 
@@ -125,7 +123,6 @@ const PgwidgetProgressLeft = styled.div`
     background: #fff;
     clip: rect(0px, 97px, 194px, 0px);
     border-radius: 100%;
-    // animation: ${left} 10s linear both;
     animation: ${props => (props.timerMin > 0 ? css`${left} ${props.animationDuration}s linear both` : '')} ;
   `;
 

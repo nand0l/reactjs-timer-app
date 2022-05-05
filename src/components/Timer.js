@@ -7,6 +7,7 @@ function Timer() {
   const [inputMin, setInputMin] = useState(1);
   const [startCountDown, setStartCountDown] = useState(false);
   const [timerMin, setTimerMin] = useState(0);
+  const [usedTimes, setUsedTimes] = useState([]);
 
   // Toggle input form
   function onToggle() {
@@ -21,7 +22,7 @@ function Timer() {
   }
 
   // submit time
-  const startTimer = useCallback(() => {
+  const startTimer = () => {
     setStartCountDown(true);
 
     if (toggleForm) {
@@ -30,30 +31,39 @@ function Timer() {
 
     // set New timer minutes
     setTimerMin(inputMin * 60 * 1000);
-  });
 
-  const stopTimer = useCallback(() => {
+    // add time to used times
+    setUsedTimes(times => [...times, inputMin]);
+  };
+
+  const stopTimer = () => {
     setStartCountDown(false);
     setTimerMin(0);
-  })
+
+    var interval_id = window.setInterval(() => { }, 99999);
+    for (var i = 0; i < interval_id; i++) {
+      window.clearInterval(i);
+    }
+  }
 
   const dateWithMins = new Date().getTime() + timerMin;
 
   const countDownTime = new Date(dateWithMins).getTime();
   const animationDuration = ((countDownTime - new Date().getTime()) / 1000) / 2;
 
-
   return (
     <div className="timer">
       <Progress {...{ timerMin, dateWithMins, animationDuration, stopTimer }} />
       <Actions {...{
-        toggleForm, setToggleForm,
-        inputMin, setInputMin,
-        startCountDown, setStartCountDown,
-        timerMin, setTimerMin,
-        onToggle, handleChange,
+        toggleForm,
+        inputMin,
+        startCountDown,
+        onToggle,
+        handleChange,
         startTimer,
-        stopTimer
+        stopTimer,
+        usedTimes,
+        setUsedTimes
       }} />
     </div>
   )
