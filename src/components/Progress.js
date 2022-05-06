@@ -1,21 +1,31 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components'
 import { useCountdown } from "../hooks/useCountDown";
 
-function Progress({ timerMin, dateWithMins, animationDuration, stopTimer }) {
+function Progress({
+  timeInMilliSeconds,
+  timeAheadInMilliSeconds,
+  animationDuration,
+  stopTimer,
+  countDownStarted,
+  countDownTime }) {
 
-  const [days, hours, minutes, seconds] = useCountdown(dateWithMins, timerMin);
+  const [minutes, seconds] = useCountdown({
+    timeAheadInMilliSeconds,
+    timeInMilliSeconds,
+    countDownStarted, countDownTime
+  });
 
   const customMinute = Math.abs(minutes) > 10 ? Math.abs(minutes) : `0${Math.abs(minutes)}`;
   const customSeconds = Math.abs(seconds) > 10 ? Math.abs(seconds) : `0${Math.abs(seconds)}`;
 
   // Clear Intervals and rest time
   useEffect(() => {
-    if ((days + hours + minutes + seconds) <= 0) {
+    if ((minutes + seconds) <= 0) {
       stopTimer();
       return;
     }
-  }, [minutes, seconds])
+  }, [minutes, seconds, stopTimer])
 
   return (
     <div className="pg-container">
@@ -23,7 +33,7 @@ function Progress({ timerMin, dateWithMins, animationDuration, stopTimer }) {
         <div className="pg-widget-inner"></div>
 
         <div className="pg-widget-number">
-          {timerMin > 0 ? customMinute : "00"}:{timerMin > 0 ? customSeconds : "00"}
+          {timeInMilliSeconds > 0 ? customMinute : "00"}:{timeInMilliSeconds > 0 ? customSeconds : "00"}
         </div>
 
         <div className="circle">
@@ -38,19 +48,20 @@ function Progress({ timerMin, dateWithMins, animationDuration, stopTimer }) {
         </div>
       </div> */}
 
+      {/* Used styled Components */}
       <Pgwidget>
         <PgWidgetInner />
         <PgwidgetNumber>
-          {timerMin > 0 ? (customMinute) : "00"}:{timerMin > 0 ? (customSeconds) : "00"}
+          {timeInMilliSeconds > 0 ? (customMinute) : "00"}:{timeInMilliSeconds > 0 ? (customSeconds) : "00"}
         </PgwidgetNumber>
 
         <Circle>
           <PgwidgetBarL>
-            <PgwidgetProgressLeft {...{ animationDuration, timerMin }} />
+            <PgwidgetProgressLeft {...{ animationDuration, timeInMilliSeconds }} />
           </PgwidgetBarL>
 
           <PgwidgetBarR>
-            <PgwidgetProgressRight {...{ animationDuration, timerMin }} />
+            <PgwidgetProgressRight {...{ animationDuration, timeInMilliSeconds }} />
           </PgwidgetBarR>
         </Circle>
       </Pgwidget>
@@ -58,7 +69,7 @@ function Progress({ timerMin, dateWithMins, animationDuration, stopTimer }) {
   )
 }
 
-export default Progress;
+export default memo(Progress);
 
 const left = keyframes`100% { transform: rotate(180deg) }`;
 const right = keyframes`100% { transform: rotate(180deg) }`;
@@ -123,7 +134,7 @@ const PgwidgetProgressLeft = styled.div`
     background: #fff;
     clip: rect(0px, 97px, 194px, 0px);
     border-radius: 100%;
-    animation: ${props => (props.timerMin > 0 ? css`${left} ${props.animationDuration}s linear both` : '')} ;
+    animation: ${props => (props.timeInMilliSeconds > 0 ? css`${left} ${props.animationDuration}s linear both` : '')} ;
   `;
 
 const PgwidgetProgressRight = styled.div`
@@ -133,6 +144,6 @@ const PgwidgetProgressRight = styled.div`
     background: #fff;
     clip: rect(0px, 97px, 194px, 0px);
     border-radius: 100%;
-    animation: ${props => (props.timerMin > 0 ? css`${right} ${props.animationDuration}s linear both` : '')} ;
-    animation-delay: ${props => (props.timerMin > 0 ? css`${props.animationDuration}s ` : '')} ;
+    animation: ${props => (props.timeInMilliSeconds > 0 ? css`${right} ${props.animationDuration}s linear both` : '')} ;
+    animation-delay: ${props => (props.timeInMilliSeconds > 0 ? css`${props.animationDuration}s ` : '')} ;
   `;

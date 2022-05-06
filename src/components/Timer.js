@@ -1,63 +1,79 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState, memo } from 'react'
 import Actions from './Actions'
 import Progress from './Progress'
 
 function Timer() {
   const [toggleForm, setToggleForm] = useState(false);
-  const [inputMin, setInputMin] = useState(1);
-  const [startCountDown, setStartCountDown] = useState(false);
-  const [timerMin, setTimerMin] = useState(0);
+  // Store the input min
+  const [timeInput, setTimeInput] = useState(1);
+  // convert mins(time) to milliseconds
+  const [timeInMilliSeconds, setTimeInMilliSeconds] = useState(0);
+  // Store used mins(times)
   const [usedTimes, setUsedTimes] = useState([]);
-
+  // Used for switching start and stop button
+  const [countDownStarted, setCountDownStarted] = useState(false);
   // Toggle input form
   function onToggle() {
     setToggleForm(toggle => toggle = !toggleForm);
   }
 
-  // Get form time from input
+  // Get time from input and set values
   function handleChange(e) {
     const inputData = parseInt(e.target.value);
-    setInputMin(inputData);
-    setTimerMin(0);
+    setTimeInput(inputData);
   }
 
-  // submit time
+  // start timer 
   const startTimer = () => {
-    setStartCountDown(true);
+    setCountDownStarted(true);
 
+    // Close the form
     if (toggleForm) {
       setToggleForm(false)
     }
 
     // set New timer minutes
-    setTimerMin(inputMin * 60 * 1000);
+    setTimeInMilliSeconds(timeInput * 60 * 1000);
 
     // add time to used times
-    setUsedTimes(times => [...times, inputMin]);
+    setUsedTimes(times => [...times, timeInput]);
   };
 
   const stopTimer = () => {
-    setStartCountDown(false);
-    setTimerMin(0);
+    //reset values
+    setCountDownStarted(false);
+    setTimeInMilliSeconds(0);
 
+    // clear all intervals (last)
     var interval_id = window.setInterval(() => { }, 99999);
     for (var i = 0; i < interval_id; i++) {
       window.clearInterval(i);
     }
   }
 
-  const dateWithMins = new Date().getTime() + timerMin;
+  // get time ahead in milliseconds
+  const timeAheadInMilliSeconds = new Date().getTime() + timeInMilliSeconds;
 
-  const countDownTime = new Date(dateWithMins).getTime();
+  // calculater animation duration
+  const countDownTime = new Date(timeAheadInMilliSeconds).getTime();
   const animationDuration = ((countDownTime - new Date().getTime()) / 1000) / 2;
 
   return (
     <div className="timer">
-      <Progress {...{ timerMin, dateWithMins, animationDuration, stopTimer }} />
+      <Progress {...{
+        timeInMilliSeconds,
+        animationDuration,
+        stopTimer,
+        countDownStarted,
+        timeAheadInMilliSeconds,
+        countDownTime
+      }}
+      />
+
       <Actions {...{
         toggleForm,
-        inputMin,
-        startCountDown,
+        timeInput,
+        countDownStarted,
         onToggle,
         handleChange,
         startTimer,
@@ -69,4 +85,4 @@ function Timer() {
   )
 }
 
-export default (Timer)
+export default memo(Timer)

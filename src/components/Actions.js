@@ -1,10 +1,15 @@
 import React, { memo, useState, useEffect } from 'react'
 
-function Actions({ toggleForm, inputMin,
-    startCountDown,
-    onToggle, handleChange,
+function Actions({
+    toggleForm,
+    timeInput,
+    countDownStarted,
+    onToggle, 
+    handleChange,
     startTimer,
-    stopTimer, usedTimes, setUsedTimes }) {
+    stopTimer,
+    usedTimes,
+    setUsedTimes }) {
 
     const [mostUsedObj, setMostUsedObj] = useState([]);
 
@@ -45,7 +50,7 @@ function Actions({ toggleForm, inputMin,
     return (
         <div className="ac-container">
             <div className="btn-container">
-                {!startCountDown ?
+                {!countDownStarted ?
                     <button onClick={startTimer}>Start</button> :
                     <button onClick={stopTimer}>Stop</button>}
                 <button onClick={onToggle}>Set Time</button>
@@ -53,7 +58,7 @@ function Actions({ toggleForm, inputMin,
 
             {toggleForm ?
                 <div className="input-form">
-                    <input type="number" defaultValue={inputMin.toString()} placeholder="enter time" name="time" onChange={handleChange} />
+                    <input type="number" defaultValue={timeInput.toString()} placeholder="enter time" name="time" onChange={handleChange} />
                 </div>
                 : null}
 

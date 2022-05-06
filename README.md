@@ -2,9 +2,9 @@
 
 This project was created by [Samuel Anthony](https://twitter.com/sam1an).
 
-## Available Scripts
+## To install
 
-In the project directory, you can run:
+Run `git clone [repo-link]` to grab this project from github
 
 ### `npm install`
 
@@ -12,9 +12,8 @@ To install the neccessary dependencies run the above command
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Full project video
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[![Everything Is AWESOME](https://yt-embed.herokuapp.com/embed?v=StTqXEQ2l-Y)](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
+
 
