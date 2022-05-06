@@ -58,6 +58,7 @@ function Timer() {
   const countDownTime = new Date(timeAheadInMilliSeconds).getTime();
   const animationDuration = ((countDownTime - new Date().getTime()) / 1000) / 2;
 
+
   return (
     <div className="timer">
       <Progress {...{
@@ -65,7 +66,6 @@ function Timer() {
         animationDuration,
         stopTimer,
         countDownStarted,
-        timeAheadInMilliSeconds,
         countDownTime
       }}
       />
