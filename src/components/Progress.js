@@ -4,20 +4,19 @@ import { useCountdown } from "../hooks/useCountDown";
 
 function Progress({
   timeInMilliSeconds,
-  timeAheadInMilliSeconds,
   animationDuration,
   stopTimer,
   countDownStarted,
   countDownTime }) {
 
   const [minutes, seconds] = useCountdown({
-    timeAheadInMilliSeconds,
     timeInMilliSeconds,
-    countDownStarted, countDownTime
+    countDownStarted,
+    countDownTime
   });
 
-  const customMinute = Math.abs(minutes) > 10 ? Math.abs(minutes) : `0${Math.abs(minutes)}`;
-  const customSeconds = Math.abs(seconds) > 10 ? Math.abs(seconds) : `0${Math.abs(seconds)}`;
+  const customMinute = minutes < 10 ? `0` + minutes : minutes;
+  const customSeconds = seconds < 10 ? `0` + seconds : seconds;
 
   // Clear Intervals and rest time
   useEffect(() => {
@@ -33,7 +32,7 @@ function Progress({
         <div className="pg-widget-inner"></div>
 
         <div className="pg-widget-number">
-          {timeInMilliSeconds > 0 ? customMinute : "00"}:{timeInMilliSeconds > 0 ? customSeconds : "00"}
+          {customMinute} : {customSeconds}
         </div>
 
         <div className="circle">
@@ -52,7 +51,7 @@ function Progress({
       <Pgwidget>
         <PgWidgetInner />
         <PgwidgetNumber>
-          {timeInMilliSeconds > 0 ? (customMinute) : "00"}:{timeInMilliSeconds > 0 ? (customSeconds) : "00"}
+          {customMinute} : {customSeconds}
         </PgwidgetNumber>
 
         <Circle>

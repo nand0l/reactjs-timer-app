@@ -45,19 +45,17 @@ function Timer() {
     setTimeInMilliSeconds(0);
 
     // clear all intervals (last)
-    var interval_id = window.setInterval(() => { }, 99999);
-    for (var i = 0; i < interval_id; i++) {
-      window.clearInterval(i);
-    }
+    // var interval_id = window.setInterval(() => { }, 99999);
+    // for (var i = 0; i < interval_id; i++) {
+    //   window.clearInterval(i);
+    // }
   }
 
   // get time ahead in milliseconds
-  const timeAheadInMilliSeconds = new Date().getTime() + timeInMilliSeconds;
+  const countDownTime = new Date().getTime() + timeInMilliSeconds;
 
   // calculater animation duration
-  const countDownTime = new Date(timeAheadInMilliSeconds).getTime();
   const animationDuration = ((countDownTime - new Date().getTime()) / 1000) / 2;
-
 
   return (
     <div className="timer">
