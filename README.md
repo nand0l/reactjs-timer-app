@@ -17,7 +17,7 @@ To install the neccessary dependencies run the above command
 
 ### `npm start`
 
-### Properties
+## Ingredients
 
 - React JS
 - Progress Bar
