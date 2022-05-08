@@ -13,6 +13,8 @@ Run `git clone [repo-link]` to grab this project from github
 
 To install the neccessary dependencies run the above command
 
+## To start the project
+
 ### `npm start`
 
 ### Properties
