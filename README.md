@@ -2,7 +2,8 @@
 
 This project was created by [Samuel Anthony](https://twitter.com/sam1an).
 
-[![Everything Is AWESOME](https://www.youtube.com/watch?v=psQquXiN5O8)](https://www.youtube.com/watch?v=psQquXiN5O8"Everything Is AWESOME")
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/psQquXiN5O8/0.jpg)](https://www.youtube.com/watch?v=psQquXiN5O8)
+
 
 ## To install
 

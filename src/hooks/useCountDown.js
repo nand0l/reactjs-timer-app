@@ -7,9 +7,7 @@ const useCountdown = ({ timeInMilliSeconds, countDownStarted, countDownTime }) =
     useEffect(() => {
         let interval
         if (timeInMilliSeconds > 0) {
-            interval = setInterval(() => {
-                setCountDown(countDownTime - new Date().getTime());
-            }, 1000);
+           
 
             return () => clearInterval(interval);
         } else if (!countDownStarted) {
@@ -24,15 +22,15 @@ const useCountdown = ({ timeInMilliSeconds, countDownStarted, countDownTime }) =
         if (!countDownStarted) { setCountDown(0); return }
     }, [countDownStarted])
 
-    return getReturnValues(countDownInMilliSeconds);
+    return getReturnValues(countDownInMilliSconds);
 };
 
 
 const getReturnValues = (countDown) => {
     // calculate the time left
-    var minutes = Math.floor(countDown / (60 * 1000));
-    var seconds = parseInt(((countDown % (60 * 1000)) / 1000).toFixed(0));
+    var minutes = Math.floor(countDown / (60 * ));
+    var seconds = parseInt(((countDown % (60 * )) / 1000).toFixed(0));
     return [minutes, seconds];
 };
 
-export { useCountdown };
+export {  };
