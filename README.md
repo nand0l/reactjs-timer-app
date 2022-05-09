@@ -2,7 +2,7 @@
 
 This project was created by [Samuel Anthony](https://twitter.com/sam1an).
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/psQquXiN5O8/0.jpg)](https://www.youtube.com/watch?v=psQquXiN5O8)
+[![Mobile First Timer App](https://i9.ytimg.com/vi_webp/psQquXiN5O8/mqdefault.webp?v=62797ddb&sqp=CMz65ZMG&rs=AOn4CLAzhL3WKJuJytu-bP0DhdK6pEFgMA)](https://www.youtube.com/watch?v=psQquXiN5O8)
 
 
 ## To install
