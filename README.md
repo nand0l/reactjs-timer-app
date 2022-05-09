@@ -2,7 +2,7 @@
 
 This project was created by [Samuel Anthony](https://twitter.com/sam1an).
 
-[![Everything Is AWESOME](https://yt-embed.herokuapp.com/embed?v=StTqXEQ2l-Y)](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
+[![Everything Is AWESOME](https://www.youtube.com/watch?v=psQquXiN5O8)](https://www.youtube.com/watch?v=psQquXiN5O8"Everything Is AWESOME")
 
 ## To install
 
