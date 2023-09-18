@@ -25,7 +25,9 @@ body {
     grid-auto-rows: 539px;
     padding: 1rem 0rem;
 }
-
+.container-fully {
+    min-height: 100vh;
+  }
 .onboarding,
 .timer {
     margin: 0.5rem auto;
